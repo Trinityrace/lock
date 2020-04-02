@@ -2,7 +2,7 @@ import random
 
 class User():
     '''
-    class for new user details and login info.
+    class for new user credentials and login info.
     '''
     users_list =[] # empty users list
 
