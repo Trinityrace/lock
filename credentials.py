@@ -32,7 +32,7 @@ class Credentials(object):
 
     def delete_credentials(self):
         '''
-        method o delete credentials
+        method to delete credentials
         '''
         Credentials.credentials_list.remove(self)
 
@@ -40,24 +40,47 @@ class Credentials(object):
     def find_cred(cls,string):
         '''
         method to find crentials using platform name
+        Args:
+            platform: platform to search for
+        Returns :
+            Credentials of person that matches the platform.
         '''
         for Credentials in cls.credentials_list:
             if Credentials.platform == string:
                 return Credentials
 
     @classmethod
-    def credentials_exist(cls,username):
+    def credential_exist(cls,username):
         '''
+        Method that checks if a credentials exists from the credentials list.
+        Args:
+            username: username to search if it exists
+        Returns :
+            Boolean: True or false depending if the user exists
         '''
-        for credentials in cls.credentials_list:
-            if credentials.username == username:
+        for Credentials in cls.credentials_list:
+            if Credentials.username == username:
                 return True
             else:
               return False
 
+    @classmethod
+    def credential_display(cls):
+        '''
+        method to return credentials list
+        '''
+        return cls.credentials_list
+
+    @classmethod
+    def generate_password(cls,length):
+        '''
+        '''
+        letters = string.ascii_lowercase
+        return "".join(random.choice(letters) for i in range(length))
+        
     
 
 
-pass
+    pass
 
 
