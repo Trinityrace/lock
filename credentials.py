@@ -36,6 +36,15 @@ class Credentials(object):
         '''
         Credentials.credentials_list.remove(self)
 
+    @classmethod
+    def find_cred(cls,string):
+        '''
+        method to find crentials using platform name
+        '''
+        for Credentials in cls.credentials_list:
+            if Credentials.platform == string:
+                return Credentials
+
     
 
 
