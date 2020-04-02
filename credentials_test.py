@@ -44,7 +44,7 @@ class TestCredentials(unittest.TestCase):
         test_credentials.save_credentials()
 
         self.new_credential.delete_credentials #delete credential object
-        self.assertEqual(len(Credentials.credentials_list),1)
+        self.assertEqual(len(Credentials.credentials_list),2)
     
     def test_find_username(self):
         '''
@@ -67,7 +67,7 @@ class TestCredentials(unittest.TestCase):
         test_credentials=Credentials("snapchat","zaddy","doshi")
         test_credentials.save_credentials()
 
-        credential_exist=Credentials.credentials_exist("zaddy")
+        credential_exist=Credentials.credential_exist("zaddy")
         self.assertTrue(credential_exist)
 
     def test_display_credentials(self):
@@ -78,6 +78,7 @@ class TestCredentials(unittest.TestCase):
 
     def test_generate_password(self):
         '''
+        test to confirm that password generated has desire length
         '''
         self.new_credential.save_credentials()
         generated_password =Credentials.generate_password(13)
