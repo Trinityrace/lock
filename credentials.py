@@ -45,6 +45,16 @@ class Credentials(object):
             if Credentials.platform == string:
                 return Credentials
 
+    @classmethod
+    def credentials_exist(cls,username):
+        '''
+        '''
+        for credentials in cls.credentials_list:
+            if credentials.username == username:
+                return True
+            else:
+              return False
+
     
 
 
