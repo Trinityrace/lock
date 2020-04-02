@@ -52,7 +52,37 @@ class TestCredentials(unittest.TestCase):
         '''
         self.new_credential.save_credentials()
         test_credentials=Credentials("twitter","marqeez","0420")
+        test_credentials.save_credentials()
+        test_credentials2=Credentials("pinterest","khalifa","420")
+        test_credentials2.save_credentials()
 
+        find_creds=Credentials.find_cred("twitter")
+        self.assertEqual(find_creds.platform,test_credentials.platform)
+
+    def test_credentials_exist(self):
+        '''
+        test to check existance of credential
+        '''
+        self.new_credential.save_credentials()
+        test_credentials=Credentials("snapchat","zaddy","doshi")
+        test_credentials.save_credentials()
+
+        credential_exist=Credentials.credentials_exist("zaddy")
+        self.assertTrue(credential_exist)
+
+    def test_display_credentials(self):
+        '''
+        test to display users credentials
+        '''
+        self.assertEqual(Credentials.credential_display(),Credentials.credentials_list)
+
+    def test_generate_password(self):
+        '''
+        '''
+        self.new_credential.save_credentials()
+        generated_password =Credentials.generate_password(13)
+        test_credentials =Credentials("reddit","doshi",generated_password)
+        self.assertEqual(len(test_credentials.password),13)
 
 if __name__ == '__main__':
     unittest.main()
