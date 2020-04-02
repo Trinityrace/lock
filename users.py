@@ -1,4 +1,5 @@
-import random
+# import random
+import unittest
 
 class User():
     '''
@@ -16,6 +17,21 @@ class User():
     
     def delete_user(self):
         User.users_list.remove(self)
+    
+    @classmethod
+    def user_auth(cls,name,pin):
+        '''
+        This method returns a boolean True if the username and pin inputted
+        matches those of a user in the users_list
+        '''
+        for User in cls.users_list:
+            if User.name == name and User.pin == pin :
+                return True
+            else:
+                return False
+
+if __name__ == '__main__':
+    unittest.main()
 
 
     pass

@@ -30,7 +30,7 @@ class TestUser(unittest.TestCase):
         self.new_user.save_user()
         test_user=User("trinity","trinity@gmail.com","123")
         test_user.save_user()
-        self.assertTrue(self.new_user.users_auth("trinity","123"))
+        self.assertTrue(self.new_user.user_auth("trinity","123"))
 
 # #third test
 #     def test_delete_user(self):
