@@ -10,4 +10,12 @@ class User():
         self.name = name
         self.email = email
         self.pin = pin
+
+    def save_user(self):
+        User.users_list.append(self)
+    
+    def delete_user(self):
+        User.users_list.remove(self)
+
+
     pass

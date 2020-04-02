@@ -2,7 +2,10 @@ import unittest
 from users import User
 
 #first test
-class TestCredentials(unittest.TestCase):
+class TestUser(unittest.TestCase):
+    '''
+    test class for users behaviours
+    '''
     def setUp(self):
         '''
         setup method to run before each test case.
@@ -22,9 +25,16 @@ class TestCredentials(unittest.TestCase):
         self.new_user.save_user()
         self.assertEqual(len(User.users_list),1)
 
-#third test
-    def test_delete_user(self):
-        self.users_list()
+#test for authentication of user
+    def test_user_auth(self):
+        self.new_user.save_user()
+        test_user=User("trinity","trinity@gmail.com","123")
+        test_user.save_user()
+        self.assertTrue(self.new_user.users_auth("trinity","123"))
+
+# #third test
+#     def test_delete_user(self):
+#         self.users_list()
 
 if __name__ == '__main__':
     unittest.main()
