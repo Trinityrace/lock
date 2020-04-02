@@ -15,7 +15,7 @@ class Credentials(object):
         Args:
             paltform: New user platform.
             username : New user username.
-            password: New contact password.
+            password: New user password.
             
         '''
         self.platform = platform
