@@ -1,4 +1,6 @@
 import unittest
+import pyperclip
+
 from users import User
 
 #first test
@@ -31,6 +33,15 @@ class TestUser(unittest.TestCase):
         test_user=User("trinity","trinity@gmail.com","123")
         test_user.save_user()
         self.assertTrue(self.new_user.user_auth("trinity","123"))
+
+#test to copy email
+    def test_copy_email(self):
+        self.new_user.save_user()
+        User.copy_email("trinity@gmail.com")
+
+        self.assertEqual(self.new_user.email,pyperclip.paste())
+
+
 
 # #third test
 #     def test_delete_user(self):
