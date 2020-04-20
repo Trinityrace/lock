@@ -55,6 +55,75 @@ def display_users():
     return User.display_users()
 
 
+def main():
+    print("Hello Welcome to your credentials list. What is your name?")
+            user_name = input()
+
+            print(f"Hello {user_name}. what would you like to do?")
+            print('\n')
+
+            while True:
+                    print("Use these short codes : cc - create a new credentials, dc - display credentials, fc -find a credentials, ex -exit the credentials list ")
+
+                    short_code = input().lower()
+
+                    if short_code == 'cc':
+                            print("New User")
+                            print("-"*10)
+
+                            print ("First name ....")
+                            f_name = input()
+
+                            print("Last name ...")
+                            l_name = input()
+
+                            print("Phone number ...")
+                            p_number = input()
+
+                            print("Email address ...")
+                            e_address = input()
+
+
+                            save_user(create_user(name,email,pin)) # create and save new user.
+                            print ('\n')
+                            print(f"New USer {name}  created")
+                            print ('\n')
+
+                    elif short_code == 'dc':
+
+                            if display_users():
+                                    print("Here is a list of all your credentials")
+                                    print('\n')
+
+                                    for user in display_users():
+                                            print(f"{user.name} .....{user.email}")
+
+                                    print('\n')
+                            else:
+                                    print('\n')
+                                    print("You dont seem to have any credentials saved yet")
+                                    print('\n')
+
+                    elif short_code == 'fc':
+
+                            print("Enter the username you want to search for")
+
+                            search_user = input()
+                            if check_existing_user(search_user):
+                                    search_user = find_user(search_user)
+                                    print(f" {search_user.name}")
+                                    print('-' * 20)
+
+                                    # print(f"Phone number.......{search_user.phone_number}")
+                                    print(f"Email address.......{search_user.email}")
+                            else:
+                                    print("That user does not exist")
+
+                    elif short_code == "ex":s
+                            print("Bye .......")
+                            break
+                    else:
+                            print("I really didn't get that. Please use the short codes")
 
 
 
