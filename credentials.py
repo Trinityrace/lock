@@ -61,8 +61,9 @@ class Credentials(object):
         for Credentials in cls.credentials_list:
             if Credentials.username == username:
                 return True
-            else:
-              return False
+        return False
+            # else:
+            #   return False
 
     @classmethod
     def credential_display(cls):
