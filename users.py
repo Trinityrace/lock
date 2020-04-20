@@ -1,5 +1,6 @@
 # import random
 import unittest
+import pyperclip
 
 class User():
     '''
@@ -17,6 +18,11 @@ class User():
     
     def delete_user(self):
         User.users_list.remove(self)
+
+    @classmethod
+    def copy_email(cls,name):
+        user_found = User.find_by_name(name)
+        pyperclip.copy(user_found.email)
     
     @classmethod
     def user_auth(cls,name,pin):

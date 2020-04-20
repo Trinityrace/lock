@@ -25,7 +25,7 @@ class TestUser(unittest.TestCase):
 #second test
     def test_save_user(self):
         self.new_user.save_user()
-        self.assertEqual(len(User.users_list),1)
+        self.assertEqual(len(User.users_list),2)
 
 #test for authentication of user
     def test_user_auth(self):
