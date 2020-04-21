@@ -44,7 +44,7 @@ def find_credential(appName):
     """
     function tofind credentials details
     """
-    return Credentials.find_creds(appName)
+    return Credentials.find_cred(appName)
 
 def credential_exist(username):
     """

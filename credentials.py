@@ -39,7 +39,7 @@ class Credentials(object):
     @classmethod
     def find_cred(cls,string):
         '''
-        method to find crentials using platform name
+        method to find credentials using platform name
         Args:
             platform: platform to search for
         Returns :
@@ -75,13 +75,22 @@ class Credentials(object):
     @classmethod
     def generate_password(cls,length):
         '''
+        this method will use the string method to generate a password of random  letters
+        the length of the password is determined by the length passed in the function's parameter as desired by user 
+        Args:
+        the desired password length
         '''
         letters = string.ascii_lowercase
         return "".join(random.choice(letters) for i in range(length))
         
+    @classmethod
+    def copy_passwords(cls, string):
+        password_found = Credentials.find_cred(string)
+        pyperclip.copy(password_found.passwords)
+
     
 
 
-    pass
+    # pass
 
 
