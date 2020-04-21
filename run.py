@@ -38,7 +38,7 @@ def delete_credential(credential):
     """
     function to delete credentials
     """
-    credential.delete_credential()
+    credential.delete_credentials()
 
 def find_credential(appName):
     """
@@ -46,11 +46,11 @@ def find_credential(appName):
     """
     return Credentials.find_cred(appName)
 
-def credential_exist(username):
+def credentials_exist(username):
     """
     function to check if a credential exist
     """
-    return Credentials.credential_exist()
+    return Credentials.credential_exist(username)
 
 def display_credentials():
     """
@@ -178,17 +178,17 @@ def main():
                             print('\n')
 
                     elif key_word == 'fc':
-                        print("Enter the username you want to search for")
+                        print("Enter the platform you want to search credentials for")
                         print("\n")
                         platform_search = input()
-                        if credential_exist(platform_search):
+                        if credentials_exist(platform_search):
                             find_creds = find_credential(platform_search)
                             print(
                                 f"""
     -------------------------------------------------------
-        Platform --- {find_cred.platform}               
-        Username --- {find_cred.username}                               
-        Password --- {find_cred.password}               
+        Platform --- {find_creds.platform}               
+        Username --- {find_creds.username}                               
+        Password --- {find_creds.password}               
     -------------------------------------------------------
                                 """)
                             print("_"*50)
@@ -198,10 +198,10 @@ def main():
                     elif key_word == "dl":
                         print("Enter the platform whose credentials you'd like to delete")
                         platform_delete = input()
-                        if credential_exist(platform_delete):
+                        if credentials_exist(platform_delete):
                             platform_creds = find_credential(platform_delete)
                             delete_credential(platform_creds)
-                            print(f"CREDENTIALS FOR {platform_creds.username} ")
+                            print(f"CREDENTIALS FOR {platform_creds.username} DELETED")
                         else:
                             print("The credential does not exist") 
 

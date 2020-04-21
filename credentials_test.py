@@ -66,8 +66,8 @@ class TestCredentials(unittest.TestCase):
         test_credentials2=Credentials("pinterest","khalifa","420")
         test_credentials2.save_credentials()
 
-        find_creds=Credentials.find_cred("twitter")
-        self.assertEqual(find_creds.platform,test_credentials.platform)
+        find_cred=Credentials.find_cred("twitter")
+        self.assertEqual(find_cred.platform,test_credentials.platform)
 
     def test_credentials_exist(self):
         '''
