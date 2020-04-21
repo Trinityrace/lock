@@ -15,6 +15,9 @@ class TestUser(unittest.TestCase):
         self.new_user = User("trinity","trinity@gmail.com","123")#create credentials object
 
     def test_init(self):
+        """
+        test case to see if the objects are initialised corectly
+        """
         self.assertEqual(self.new_user.name,"trinity")
         self.assertEqual(self.new_user.email,"trinity@gmail.com")
         self.assertEqual(self.new_user.pin,"123")
@@ -23,15 +26,21 @@ class TestUser(unittest.TestCase):
 #     unittest.main()
 
 #second test
-    def test_save_user(self):
-        self.new_user.save_user()
+    def test_save_login(self):
+        """
+        test case to check if the objects are saved in the credentials list
+        """
+        self.new_user.save_login()
         self.assertEqual(len(User.users_list),1)
 
 #test for authentication of user
     def test_user_auth(self):
-        self.new_user.save_user()
+        """
+        test_users_auth tests case to authenticate the user
+        """
+        self.new_user.save_login()
         test_user=User("trinity","trinity@gmail.com","123")
-        test_user.save_user()
+        test_user.save_login()
         self.assertTrue(self.new_user.user_auth("trinity","123"))
 
 # #test to copy email
