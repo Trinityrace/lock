@@ -5,6 +5,9 @@ import pyperclip
 from credentials import Credentials
 
 class TestCredentials(unittest.TestCase):
+    """
+    test class for credentials behaviours
+    """
     def setUp(self):
         '''
         setup method to run before each test case.
@@ -12,11 +15,17 @@ class TestCredentials(unittest.TestCase):
         self.new_credential = Credentials("instagram","trinity","123")#create credentials object
 
     def test_init(self):
+        """
+        checking if the objects are initialised correctly
+        """
         self.assertEqual(self.new_credential.platform,"instagram")
         self.assertEqual(self.new_credential.username,"trinity")
         self.assertEqual(self.new_credential.password,"123")
 
     def test_save_credentials(self):
+        """
+        test case to check if the objects are being saved in the credentials_list
+        """
         self.new_credential.save_credentials()
         self.assertEqual(len(Credentials.credentials_list),1)
 
@@ -37,7 +46,7 @@ class TestCredentials(unittest.TestCase):
 
     def test_delete_credentials(self):
         '''
-        test to check deletion of credentials
+        test to check deletion ability of credentials
         '''
         self.new_credential.save_credentials()
         test_credentials=Credentials("twitter","marqeez","0420")
@@ -45,6 +54,7 @@ class TestCredentials(unittest.TestCase):
 
         self.new_credential.delete_credentials #delete credential object
         self.assertEqual(len(Credentials.credentials_list),2)
+        #self.assertEqual(len(Credentials.credentials_list),1)
     
     def test_find_username(self):
         '''
@@ -81,9 +91,12 @@ class TestCredentials(unittest.TestCase):
         test to confirm that password generated has desire length
         '''
         self.new_credential.save_credentials()
-        generated_password =Credentials.generate_password(13)
-        test_credentials =Credentials("reddit","doshi",generated_password)
+        generated_password = Credentials.generate_password(13)
+        test_credentials = Credentials("reddit","doshi",generated_password)
+        test_credentials.save_credentials()
+
         self.assertEqual(len(test_credentials.password),13)
+
 
 if __name__ == '__main__':
     unittest.main()
