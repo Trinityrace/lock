@@ -25,7 +25,7 @@ class User():
     #     pyperclip.copy(user_found.email)
     
     @classmethod
-    def user_auth(cls,name,pin):
+    def users_auth(cls,name,pin):
         '''
         This method returns a boolean True if the username and pin inputted
         matches those of a user in the users_list
@@ -33,8 +33,9 @@ class User():
         for User in cls.users_list:
             if User.name == name and User.pin == pin :
                 return True
-            else:
-                return False
+            return False
+            # else:
+            #     return False
 
 if __name__ == '__main__':
     unittest.main()
