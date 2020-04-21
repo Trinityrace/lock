@@ -177,6 +177,7 @@ def main():
                             print("_"*50)
                             print('\n')
 
+        ##FC FIND-CONTACT works only if platform name and username are similar
                     elif key_word == 'fc':
                         print("Enter the platform you want to search credentials for")
                         print("\n")
@@ -195,6 +196,7 @@ def main():
                         else:
                             print("The credential does not exist")
 
+        ##DL DELETE works only if platform name and username are similar
                     elif key_word == "dl":
                         print("Enter the platform whose credentials you'd like to delete")
                         platform_delete = input()
