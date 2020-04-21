@@ -1,127 +1,226 @@
-#! shebang
-# chmod +x run.py
-# ./run.py
-#!/usr/bin/env python3.6
+# #! shebang
+# # chmod +x run.py
+# # ./run.py
+# #!/usr/bin/env python3.6
 
 import string
 import random
-
 from users import User
 from credentials import Credentials
 
-
-#create user
 def create_login(name,email,pin):
-    '''
-    Function to create new User account for password locker
-    '''
-    new_user = User(name,email,pin)
+    """
+    function to create a new account for password locker
+    """
+    new_user=User(name,email,pin)
     return new_user
 
-#save user
-def save_login(User):
-    '''
-    function to save user
-    '''
-    User.save_login()
+def save_login(user):
+    """
+    Function to save user login details
+    """
+    user.save_login()
 
-#delete user
-def del_user(user):
-    '''
-    function to delete user
-    '''
-    user.delete_user()
+def create_existing_credentials(platform ,username , password):
+    """
+    function to create existing credentials accounts 
+    """
+    new_credential=Credentials(platform ,username , password)
+    return new_credential
 
-#find user
+def save_credentials(credential):
+    """
+    function to save credentials
+    """
+    credential.save_credentials()
+
+def delete_credential(credential):
+    """
+    function to delete credentials
+    """
+    credential.delete_credential()
+
 def find_credential(appName):
-    '''
-    function to credential details
-    '''
-    return Credentials.find_users(appName)
+    """
+    function tofind credentials details
+    """
+    return Credentials.find_creds(appName)
 
-#user exists
-def check_existing_credentials(user):
-    '''
-    function to check if user exists with that username and return
-    a boolean
-    '''
-    return Credentials.credential_exist(name)
+def credential_exist(username):
+    """
+    function to check if a credential exist
+    """
+    return Credentials.credential_exist()
 
-#displaying all credentials
-def display_users():
-    '''
-    function to return saved credentials
-    '''
-    return User.display_users()
+def display_credentials():
+    """
+    function that returns a list of credentials listed
+    """
+    return Credentials.credential_display()
 
+def authenticate_user(username,pin):
+    return User.users_auth(username,pin)
+
+def generate_password(length):
+    """
+    Function which generates a random password
+    Args:
+        the desired password length
+    """
+    return Credentials.generate_password(length)
 
 def main():
-    print("Hello Welcome to password locker. What is your name?")
-    user_name = input()
-
-    print(f"Hello {user_name}. what would you like to do?")
-    print('\n')
+    print("hey there, welcome to password locker  ,we  can save your passwords safely for all your accounts and also generate new ones  but please first login ")
 
     while True:
-            print("Use these short codes : cc - create a new credentials, dc - display credentials, fc -find a credentials, ex -exit the credentials list ")
+        print(
+            """
+        Use the following short codes to manage your account 
+            'lg' - Login 
+            'xx' - Close app
+            """)
+        print("What would you like to do?")
+        shortCode = input().lower()
+        if shortCode == "lg":
+            print("Do you have an account? Y or N")
+            decision = input().lower()
 
-            short_code = input().lower()
+            if decision.startswith("n"):
+                email=input("enter your email :")
+                name=input("enter your name :")
+                
+                password = input("Enter your pin: ")#can use get pass method to show its a password is being entered
+               
+                print("\n")
+                print (f"CONGRATULATIONS, {name} YOUR ACCOUNT HAS BEEN CREATED")
+                print("Sign into your new account")
+                sign_in_name = input("Enter your name : ")
+                sign_in_pin = input("Enter your pin : ")#get pass
+                save_login(create_login(name,email,password))
+                if authenticate_user(sign_in_name,sign_in_pin):
+                    
+                    print("SUCCESSFULLY SIGNED IN")  
+                    print("\n")
+                    pass
+                else:
+                    print("Oops, you entered the wrong username/pin, we have to do this again :(")
+                    print("\n")
+            else:
+                sign_in_name = input("Enter your username: ")
+                sign_in_pin = input("Enter your pin: ")
+                if authenticate_user(sign_in_name,sign_in_pin):
+                    
+                    print("SUCCESSFULLY SIGNED IN")  
+                    print("\n")
+                    pass
+                else:
+                    print("Oops, you entered the wrong username/pin, we have to do this again :(")
+                    print("\n")
 
-            if short_code == 'cc':
-                    print("New User")
-                    print("-"*10)
+            while True:
+                if authenticate_user(sign_in_name,sign_in_pin):
+                    print(  """
+                            welcome to password locker
+                            use the following commands:
+                            'cc' - enables you to create an a credential
+                            'dc' - displays the credentials you have saved
+                            'fc' - helps you find a credential by its social name
+                            'dl' - deletes a credential
+                            'ex' - logs you out
+                            'help' - helps a user around the app
+                            """
+                            )
+                    print(f"{sign_in_name}, what task would you like to perform?")
+                    key_word = input().lower()
 
-                    print ("User name ....")
-                    name = input()
+                    if key_word == 'cc':
+                        print("Save a new credential")
+                        platform = input("Input social app name: ")
+                        print("\n")
+                        name = input("Input your username: ")
+                        print("\n")
+                        option = input("Would you wish to have Vault generate a password for you? Y or N ").lower()
+                        if option.startswith("y"):
+                            print()
+                            desired_len = int(input("How long would you like your password to be? Provide number only. "))
+                            password = generate_password(desired_len)
+                        else:
+                            print("\n")
+                            password = input("Enter your password: ")
 
+                        save_credentials(create_existing_credentials(platform,name,password))
+                        print('\n')
+                        print(f"NEW CREDENTIALS FOR {platform} CREATED!")
+                        print("_"*50)
+                        print('\n')
 
-                    print("Email address ...")
-                    email = input()
+                    elif key_word == 'dc':
 
-
-                    save_login(save_user(name,email,pin)) # create and save new user.
-                    print ('\n')
-                    print(f"New USer {name}  created")
-                    print ('\n')
-
-            elif short_code == 'dc':
-
-                    if display_users():
-                            print("Here is a list of all your credentials")
+                        if display_credentials():
+                            print("HERE ARE YOUR CREDENTIALS")
                             print('\n')
 
-                            for user in display_users():
-                                    print(f"{user.name} .....{user.email}")
-
-                            print('\n')
-                    else:
+                            for credentials in display_credentials():
+                                print(
+                                    f"""
+    --------------------------------------------------
+            Platform --- {credentials.platform}               
+            Username --- {credentials.username}                                
+            Password --- {credentials.password}               
+    --------------------------------------------------
+                                """
+                                )
+                                print('\n')
+                        else:
                             print('\n')
                             print("You dont seem to have any credentials saved yet")
+                            print("_"*50)
                             print('\n')
 
-            elif short_code == 'fc':
+                    elif key_word == 'fc':
+                        print("Enter the username you want to search for")
+                        print("\n")
+                        platform_search = input()
+                        if credential_exist(platform_search):
+                            find_creds = find_credential(platform_search)
+                            print(
+                                f"""
+    -------------------------------------------------------
+        Platform --- {find_cred.platform}               
+        Username --- {find_cred.username}                               
+        Password --- {find_cred.password}               
+    -------------------------------------------------------
+                                """)
+                            print("_"*50)
+                        else:
+                            print("The credential does not exist")
 
-                    print("Enter the username you want to search for")
+                    elif key_word == "dl":
+                        print("Enter the platform whose credentials you'd like to delete")
+                        platform_delete = input()
+                        if credential_exist(platform_delete):
+                            platform_creds = find_credential(platform_delete)
+                            delete_credential(platform_creds)
+                            print(f"CREDENTIALS FOR {platform_creds.username} ")
+                        else:
+                            print("The credential does not exist") 
 
-                    search_user = input()
-                    if check_existing_user(search_user):
-                            search_user = find_user(search_user)
-                            print(f" {search_user.name}")
-                            print('-' * 20)
+                    elif key_word == "ex":
+                        print(f"Have a nice day {sign_in_name}")
+                        print("_"*50)
+                        break
+                
+                else:
+                    print("Oops, you entered the wrong username/pin, we have to do this again :(")
+                    print("\n")
+                    break
 
-                            # print(f"Phone number.......{search_user.phone_number}")
-                            print(f"Email address.......{search_user.email}")
-                    else:
-                            print("That user does not exist")
-
-            elif short_code == "ex":
-                    print("Bye .......")
+        elif shortCode == "xx":
+            print("GOODBYE")
             break
-    else:
-                    print("I really didn't get that. Please use the short codes")
-
-
-
+        
+        else:
+            print("You have entered an unknown short code, please try again")
 
 if __name__ == '__main__':
     main()
