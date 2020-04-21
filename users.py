@@ -13,7 +13,7 @@ class User():
         self.email = email
         self.pin = pin
 
-    def save_user(self):
+    def save_login(self):
         User.users_list.append(self)
     
     def delete_user(self):
@@ -40,4 +40,4 @@ if __name__ == '__main__':
     unittest.main()
 
 
-    pass
+#    pass
